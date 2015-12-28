@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour {
     public Text bigText;
     public Text littleText;
 
-
     void Update() {
         if (Input.GetKeyDown(KeyCode.Escape))
         {

@@ -10,6 +10,7 @@ public class StarField : MonoBehaviour {
     public float maxStarSize = 0.5f;
     public float minSpeed = 0.1f;
     public float maxSpeed = 0.2f;
+    public float fallSpeedMagnitude = 1.0f;
     public bool isFalling;
 
     private Transform[] stars;
@@ -41,7 +42,7 @@ public class StarField : MonoBehaviour {
     void MoveStars() {
         foreach (Transform star in stars)
         {
-            star.Translate(-Vector3.up * star.GetComponent<Star>().FallingSpeed);
+            star.Translate(-Vector3.up * star.GetComponent<Star>().FallingSpeed * fallSpeedMagnitude);
         }
     }
 
@@ -55,6 +56,10 @@ public class StarField : MonoBehaviour {
                 stars[i].position = Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0.0f, 1.0f), Random.Range(1.0f, 2.0f), 10));
             }
         }
+    }
+
+    public void ChangeSpeed (float nSpeed) {
+        fallSpeedMagnitude = nSpeed;
     }
 
     public void SpeedUp () {
