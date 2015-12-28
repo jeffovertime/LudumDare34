@@ -27,8 +27,8 @@ public class EnemySpawner : MonoBehaviour {
             enemyInstance.transform.position = new Vector3(enemyInstance.transform.position.x, enemyInstance.transform.position.y, 0);
             float rand = Random.Range(minSize, maxSize);
             enemyInstance.transform.localScale *= rand;
-            enemyInstance.GetComponent<Enemy>().health = (int)rand * 9;
-            enemyInstance.GetComponent<Enemy>().fallingSpeed -= 5 * rand;
+            //enemyInstance.GetComponent<Enemy>().health = (int)rand * 9;
+            //enemyInstance.GetComponent<Enemy>().fallingSpeed -= 5 * rand;
             yield return new WaitForSeconds(Random.Range(minSpawnRate, maxSpawnRate));
         }
     }

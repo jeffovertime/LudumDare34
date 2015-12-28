@@ -1,16 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Sniper : Enemy2 {
+public class Sniper : Enemy {
 
-    //private Vector3 targetDirection;
+    private Vector2 targetVelocity;
 
     private void Start () {
+        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         _renderer = GetComponent<SpriteRenderer>();
-        health = 5;
-        //targetVelocity.y = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>().velocity.y - fallingSpeed;
+        targetVelocity = (Vector2.up * Game.ascensionVelocity) - (Vector2)(transform.position - _player.transform.position).normalized * speed;
         _rigidbody = GetComponent<Rigidbody2D>();
-        //targetDirection = GameObject.FindGameObjectWithTag("Player").transform.position - transform.position;
     }
 
     public override void Damage(int damageDone) {
@@ -37,10 +36,17 @@ public class Sniper : Enemy2 {
         _renderer.color = Color.white;
     }
 
+    private void Update () {
+        if (Camera.main.WorldToViewportPoint(transform.position).y < -0.1)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void FixedUpdate () {
         if (!Game.gameOver)
         {
-
+            _rigidbody.velocity = targetVelocity;
         }
     }
 }

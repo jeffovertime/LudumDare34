@@ -11,8 +11,6 @@ public class Rocket : MonoBehaviour {
     public GameObject heightDisplay;
     public GameObject HP;
     private AudioSource _audio;
-    //public GameObject[] distanceStars;
-    //public GameObject[] timedStars;
 
     void Start () {
         _audio = GetComponent<AudioSource>();
@@ -23,7 +21,7 @@ public class Rocket : MonoBehaviour {
         if (other.CompareTag("Enemy"))
         {
             health--;
-            //other.GetComponent<Enemy>().Explode();
+            other.GetComponent<Enemy>().OnDeath();
             if (_audio.isPlaying)
             {
                 _audio.Stop();

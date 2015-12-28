@@ -16,6 +16,10 @@ public class PlayerController : MonoBehaviour {
     private GameObject laser;
     private bool launched;
 
+    void Awake () {
+        Game.ascensionVelocity = speed;
+    }
+
     void Start() {
         launched = false;
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -25,18 +29,11 @@ public class PlayerController : MonoBehaviour {
     public void Launch () {
         rocketSparks.SetActive(true);
         launched = true;
-        //StartCoroutine(LaunchSequence());
     }
-
-    //IEnumerator LaunchSequence() {
-    //    yield return new WaitForSeconds(2.0f);
-
-    //}
 
     void Update() {
         moveLeft = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
         moveRight = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
-        //firing = Input.GetKeyDown(KeyCode.A) && Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.LeftArrow) && Input.GetKeyDown(KeyCode.RightArrow);
     }
 
     void FixedUpdate() {

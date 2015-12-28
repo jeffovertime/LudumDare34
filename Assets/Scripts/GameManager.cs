@@ -1,32 +1,37 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
+using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
     public Text bigText;
     public Text littleText;
 
-    void Update() {
+    void Awake() {
+        Game.gameOver = false;
+        Game.gameWon = false;
+    }
+
+    void Update () {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
         }
     }
 
+    public void Win() {
+        StartCoroutine(WinConditionMet());
+    }
+
+    public void Lose(float height) {
+        StartCoroutine(Failure(height));
+    }
+
     bool BothPressed () {
         return Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D);
     }
 
-    public void Win () {
-        StartCoroutine(WinConditionMet());
-    }
-
-    public void Lose (float height) {
-        StartCoroutine(AbsoulteFailure(height));
-    }
-
-    IEnumerator WinConditionMet () {
+    IEnumerator WinConditionMet() {
         yield return new WaitForSeconds(0.5f);
         bigText.text = "<b>TAKE THAT, MOON</b>";
         yield return new WaitForSeconds(0.75f);
@@ -39,7 +44,7 @@ public class GameManager : MonoBehaviour {
         Application.LoadLevel(Application.loadedLevel);
     }
 
-    IEnumerator AbsoulteFailure(float height) {
+    IEnumerator Failure(float height) {
         yield return new WaitForSeconds(0.75f);
         bigText.text = @"You didn't punish the moon for existing :(";
         yield return new WaitForSeconds(0.75f);
