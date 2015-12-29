@@ -6,7 +6,7 @@ public class Sniper : Enemy {
     private Vector2 targetVelocity;
 
     private void Start () {
-        _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+        //_player = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         _renderer = GetComponent<SpriteRenderer>();
         targetVelocity = (Vector2.up * Game.ascensionVelocity) - (Vector2)(transform.position - _player.transform.position).normalized * speed;
         _rigidbody = GetComponent<Rigidbody2D>();

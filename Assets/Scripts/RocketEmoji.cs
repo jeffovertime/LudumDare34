@@ -2,15 +2,14 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class RocketEmoji : MonoBehaviour {
+public class RocketEmoji : Emoji {
 
-    private Text _text;
     private Transform player;
     private Transform moon;
     private bool showingHurt;
 
-    void Start () {
-        _text = GetComponent<Text>();
+    protected override void Start () {
+        base.Start();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         moon = GameObject.FindGameObjectWithTag("Moon").transform;
     }
@@ -30,7 +29,7 @@ public class RocketEmoji : MonoBehaviour {
     }
 
     public void ShowHurtEmoji () {
-        _text.text = ";(";
+        SetText(";(");
         StartCoroutine(HurtFaceAnimation());
     }
 

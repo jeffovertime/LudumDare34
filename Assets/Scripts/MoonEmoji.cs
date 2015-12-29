@@ -1,13 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class MoonEmoji : MonoBehaviour {
-
-    private Text _text;
-
-    void Start () {
-        _text = GetComponent<Text>();
-    }
+public class MoonEmoji : Emoji {
 
     public void AngryMoon () {
         _text.text = ">:\'(";
